@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  <title>Hello, world!</title>
+</head>
+
+<body>
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <div class="py-5 text-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="display-2">&nbsp;1033 Program&nbsp;</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p class="lead">Program 1033 is a goverment initiative to funnel surplus military goods to police departments across the country, at a discount. This initiative has led to local security services acquiring armored vehicles, Weapons and other nonviolent military supplies. Use this service to find out what your local PD has acquired and how much was spent doing so.&nbsp;<br></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+{{stat['deptName']}} has spent {{stat['total']}}
+
+{% for item in spendlist %}
+<article class="list">
+	<header>
+		<div>
+
+			 {{ item['item'] , item['cost'] , item['quantity'] }}
+
+		</div>
+	</header>
+{% endfor %}
+</body>
+
+</html>
