@@ -1,7 +1,7 @@
 import os 
 from flask import Flask
 
-freeapp = Flask(__name__, instance_relative_config=True)
+app = Flask(__name__, instance_relative_config=True)
 def create_app(test_config=None):
     
     app.config.from_mapping(
