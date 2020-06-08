@@ -8,10 +8,8 @@ app.config.from_mapping(
             DATABASE = os.path.join(app.instance_path, 'police.sqlite'),
         )
 
-if test_config is None:
-    app.config.from_pyfile('config.py', silent=True)
-else:
-    app.config.from_mapping(test_config)
+#app.config.from_pyfile('config.py', silent=True)
+ 
 
 try:
     os.makedirs(app.instance_path)
@@ -24,5 +22,4 @@ simdb.init_app(app)
 from . import main
 app.register_blueprint(main.bp)
 
-return app
 
