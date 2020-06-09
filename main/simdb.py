@@ -1,6 +1,7 @@
-import sqlite3
 import pandas as pd
 import os.path
+import os
+import psycopg2
 from os import path
 import click
 from flask import Blueprint, current_app, g
@@ -9,9 +10,11 @@ from flask.cli import with_appcontext
 # connects to db
 def get_db():
     if 'db' not in g:
-        g.db = sqlite3.connect(current_app.config['DATABASE'],  detect_types=sqlite3.PARSE_DECLTYPES)
-        g.db.row_factory = sqlite3.Row
+        DATABASE_URL = os.environ['DATABASE_URL']
+        g.db = psycopg2.connect(DATABASE_URL, sslmode='require')
     return g.db
+
+
 # closes db
 def close_db(e=None):
     db = g.pop('db', None)
