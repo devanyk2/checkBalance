@@ -2,23 +2,18 @@
 <html>
 
 <head>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <!-- Required meta tags -->
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <title>Hello, world!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+  <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.3.1.css">
 </head>
 
 <body>
-  <!-- Optional JavaScript -->
-  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <div class="py-5 text-center">
+  <div class="py-5">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="display-2">&nbsp;1033 Program&nbsp;</h1>
+          <h1 class="display-2 text-center">The 1033 Program </h1>
         </div>
       </div>
     </div>
@@ -27,25 +22,43 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <p class="lead">Program 1033 is a goverment initiative to funnel surplus military goods to police departments across the country, at a discount. This initiative has led to local security services acquiring armored vehicles, Weapons and other nonviolent military supplies. Use this service to find out what your local PD has acquired and how much was spent doing so.&nbsp;<br></p>
+          <p class="" style="">Program 1033 is a goverment initiative to funnel surplus military goods to police departments across the country, at a discount. This initiative has led to local security services acquiring armored vehicles, Weapons and other military supplies. Use this service to find out what your local PD has acquired and how much was spent doing so. Currently only shows Washington counties*</p>
         </div>
       </div>
     </div>
   </div>
-  
-
-{{stat['deptName']}} has spent {{stat['total']}}
-
-{% for item in spendlist %}
-<article class="list">
-	<header>
-		<div>
-
-			 {{ item['item'] , item['cost'] , item['quantity'] }}
-
-		</div>
-	</header>
-{% endfor %}
+  <div class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="table-responsive">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Item</th>
+                  <th>Cost</th>
+                </tr>
+              </thead>
+              <tbody>
+		{% for item in spendlist %}
+		 <tr>
+                  <td>1</td>
+		  <td>{item['item']}</td>
+		  <td>{item['cost']}</td>
+                </tr>
+		{% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous" style=""></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous" style=""></script>
+  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 20px;right:20px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:220px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;<img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"></pingendo>
 </body>
 
 </html>
