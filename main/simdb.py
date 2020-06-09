@@ -26,7 +26,6 @@ def query(dept, state):
     cur.execute("SELECT deptname, cost as total FROM deptCost WHERE deptname = %s ;", (dept,))
     report = cur.fetchone()
     cur.close()
-    db.close()
     return report
 
 # item list query
