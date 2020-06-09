@@ -41,12 +41,14 @@
                 </tr>
               </thead>
               <tbody>
+		{% set iter = 1%}
 		{% for item in spendlist %}
 		 <tr>
-                  <td>1</td>
+		  <td>{{iter}}</td>
 		  <td>{{item['item']}}</td>
 		  <td>{{item['cost']}}</td>
                 </tr>
+		{% set iter = iter + 1%}
 		{% endfor %}
               </tbody>
             </table>
