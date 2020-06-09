@@ -57,7 +57,7 @@ def itemQuery(dept, state):
     db = get_db()
     cur = db.cursor()
     cur.execute("SELECT item, cost, quantity FROM _deptList WHERE deptname = %s AND state = %s ;", (dept, state,))
-    report =  cur.fetchall()
+    report = cur.fetchall()
     return report
  
 
