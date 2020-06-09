@@ -10,6 +10,8 @@ def get_db():
         g.db = psycopg2.connect(DATABASE_URL, sslmode='require')
     return g.db
 
+def init_app(app):
+    app.teardown_appcontext(close_db)
 
 # closes db
 def close_db(e=None):
