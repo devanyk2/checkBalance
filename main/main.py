@@ -15,21 +15,10 @@ def start():
 
 @bp.route('/<string:state>/<string:dept>', methods=('GET', 'POST'))
 def home(state, dept):
-    default = ""
-    sdefault = ""
-    if state is not None:
-        sdefault = state
-        if dept is None:
-            default = "ZILLAH"
-        else:
-            default = dept
-    else:
+    if state is None:
         return redirect(url_for('main.home', state = "WA", dept= "ZILLAH"))
 
-
-
-    total = query(default, sdefault)
-    report = itemQuery(default, sdefault)
-
+    total = query(dept, state)
+    report = itemQuery(dept, state)
     
     return render_template('home.html', stat = total, spendlist = report)
