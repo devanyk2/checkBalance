@@ -109,6 +109,16 @@ def deptCost(df, uniqueList):
                 (p, v))
 
     conn.commit()
-tables()
-df = loadCSV()
-loadDB(df)
+def testFunc():
+    conn =  get_db()
+    cur = conn.cursor()
+    cur.execute("SELECT * from deptList limit 10")
+    report = cur.fetchall()
+    for item in report:
+        print(item[1])
+testFunc()
+#tables()
+#df = loadCSV()
+#loadDB(df)
+
+

@@ -17,6 +17,9 @@ def start():
 def home(state, dept):
     if state is None:
         return redirect(url_for('main.home', state = "WA", dept= "ZILLAH"))
+    if dept is None:
+        return redirect(url_for('main.home', state = "WA", dept= "ZILLAH"))
+
 
     total = query(dept, state)
     report = itemQuery(dept, state)

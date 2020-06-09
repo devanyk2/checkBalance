@@ -1,6 +1,5 @@
 import os
 import psycopg2
-import click
 from flask import Blueprint, current_app, g
 from flask.cli import with_appcontext
 
@@ -18,33 +17,7 @@ def close_db(e=None):
     if db is not None:
         db.close()
 
-# creates DB
-def init_db():
-    db = get_db()
-
-    with current_app.open_resource("schema.sql") as f:
-        db.executescript(f.read().decode('utf8'))
-
-@click.command('init-db')
-@with_appcontext
-def init_db_command():
-    init_db()
-    click.echo('init db')
-
-@click.command('load-db')
-@with_appcontext
-def load_db_command():
-    df = loadCSV()
-    loadDB(df)
-    click.echo('db loaded')
-
-
-def init_app(app):
-    app.teardown_appcontext(close_db)
-    app.cli.add_command(init_db_command)
-    app.cli.add_command(load_db_command)
-
-# main stat query
+# creates DB# main stat query
 def query(dept, state):
     db = get_db()
     cur = db.cursor()
@@ -56,8 +29,7 @@ def query(dept, state):
 def itemQuery(dept, state):
     db = get_db()
     cur = db.cursor()
-    cur.execute("SELECT item, cost, quantity FROM deptList WHERE deptname = %s AND state = %s ;", (dept, state,))
+    cur.execute("SELECT item, cost, quantity FROM deptList WHERE deptname = %s AND state = %s;", (dept,state,))
     report = cur.fetchall()
     return report
  
-
