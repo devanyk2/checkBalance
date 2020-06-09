@@ -25,6 +25,8 @@ def query(dept, state):
     cur = db.cursor()
     cur.execute("SELECT deptname, cost as total FROM deptCost WHERE deptname = %s ;", (dept,))
     report = cur.fetchone()
+    cur.close()
+    db.close()
     return report
 
 # item list query
@@ -33,5 +35,7 @@ def itemQuery(dept, state):
     cur = db.cursor()
     cur.execute("SELECT item, cost, quantity FROM deptList WHERE deptname = %s AND state = %s;", (dept,state,))
     report = cur.fetchall()
+    cur.close()
+    db.close()
     return report
  
