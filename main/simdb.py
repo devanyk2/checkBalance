@@ -48,7 +48,7 @@ def init_app(app):
 def query(dept, state):
     db = get_db()
     cur = db.cursor()
-    cur.execute("SELECT deptname, cost as total FROM _deptCost WHERE deptname = %s ;", (dept,))
+    cur.execute("SELECT deptname, cost as total FROM deptCost WHERE deptname = %s ;", (dept,))
     report = cur.fetchone()
     return report
 
@@ -56,7 +56,7 @@ def query(dept, state):
 def itemQuery(dept, state):
     db = get_db()
     cur = db.cursor()
-    cur.execute("SELECT item, cost, quantity FROM _deptList WHERE deptname = %s AND state = %s ;", (dept, state,))
+    cur.execute("SELECT item, cost, quantity FROM deptList WHERE deptname = %s AND state = %s ;", (dept, state,))
     report = cur.fetchall()
     return report
  
