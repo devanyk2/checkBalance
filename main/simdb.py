@@ -48,16 +48,16 @@ def init_app(app):
 def query(dept, state):
     db = get_db()
     cur = db.cursor()
-    report = cur.execute(
-            'SELECT deptName, cost as total FROM _deptCost WHERE deptName = %s ;', (dept,)).fetchone()
+    cur.execute("SELECT deptName, cost as total FROM _deptCost WHERE deptName = %s ;", (dept,))
+    report = cur.fetchone()
     return report
 
 # item list query
 def itemQuery(dept, state):
     db = get_db()
     cur = db.cursor()
-    report = cur.execute(
-        'SELECT item, cost, quantity FROM _deptList WHERE deptName = %s AND state = %s LIMIT 50', (dept, state,)).fetchall()
+    cur.execute("SELECT item, cost, quantity FROM _deptList WHERE deptName = %s AND state = %s LIMIT 50", (dept, state,))
+    report =  cur.fetchall()
     return report
  
 
