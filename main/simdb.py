@@ -1,8 +1,5 @@
-import pandas as pd
-import os.path
 import os
 import psycopg2
-from os import path
 import click
 from flask import Blueprint, current_app, g
 from flask.cli import with_appcontext
@@ -50,108 +47,17 @@ def init_app(app):
 # main stat query
 def query(dept, state):
     db = get_db()
-
-    report = db.execute(
-            'SELECT deptName, cost as total FROM deptCost WHERE deptName = ?', (dept,)).fetchone()
+    cur = db.cursor()
+    report = cur.execute(
+            'SELECT deptName, cost as total FROM deptCost WHERE deptName = %s ;', (dept,)).fetchone()
     return report
 
 # item list query
 def itemQuery(dept, state):
     db = get_db()
-    report = db.execute(
-        'SELECT item, cost, quantity FROM deptList WHERE deptName = ? AND state = ? LIMIT 50', (dept, state,)).fetchall()
+    cur = db.cursor()
+    report = cur.execute(
+        'SELECT item, cost, quantity FROM deptList WHERE deptName = %s AND state = %s LIMIT 50', (dept, state,)).fetchall()
     return report
  
-# crates a Dataframe from the CSV
-def loadCSV():
-    name = "1033Rec"
-    rawData = pd.read_csv(name)
-    df = pd.DataFrame()
-    df["State"] = rawData.State
-    df["Dept"] =  rawData.Station
-    df["Cost"] = rawData.Value
-    df["Quantity"] = rawData.Quantity
-    df["Item"] = rawData.Item
-    return df
-
-# Temporary but creates a unique list of departments in Washington
-def unique(df):    
-    uniqueDept = []
-    for dept in df["Dept"]:
-       if dept in uniqueDept:
-          continue
-       else:
-           uniqueDept.append(dept)
-    return uniqueDept
-
-# cleans up dept name
-def sanitize(dept):
-    iter = 0
-    while dept[iter] != " ":
-        iter= iter+1
-    dept = dept[:iter]
-    return dept
-
-# loads dataframe into database
-def loadDB(df):
-    db = get_db()
-    uniqueDept = unique(df)
-    clean = []
-    for temp in uniqueDept:
-        val = sanitize(temp)
-        clean.append(val)
-    
-    deptCost(df, uniqueDept)
-
-    for index, row in df.iterrows():
-        cdpt = row.Dept
-        for val in clean:
-            if val in cdpt:
-                cdpt = val
-                
-        db.execute(
-               'Insert INTO deptList(state, deptName, cost, quantity, item) VALUES(?,?,?,?,?)',
-               (row.State, cdpt, row.Cost, row.Quantity, row.Item,))
-        db.commit()
-
-def deptCost(df, uniqueList):
-    db = get_db()
-    deptDict= {}
-    for item in uniqueList:
-        deptDict.update( {item: 0})
-
-    for index, row in df.iterrows():
-        for dept in uniqueList:
-            if dept in row.Dept:
-                val = deptDict[dept]
-                tempC = row.Cost.replace('$', "")
-                tempC = tempC.replace(',', "")
-                tempQ = int(row.Quantity)
-                val = val + (float(tempC))
-                deptDict.update({sanitize(dept):val})
-
-    for p, v in deptDict.items():
-        db.execute(
-                'INSERT INTO deptCost(deptName, cost) VALUES(?,?)',
-                (p, v,))
-        db.commit()
-
-
-
-
-
-#if not path.exists('police.db'):
-#init_db()
-
-#df = loadCSV()
-#loadDB(df)
-#uniques = unique(df)
-
-#for dept in uniques:
-#   query(dept,"WA")
-
-#report = itemQuery(uniques[1], "wa")
-#for page in report:
-#    print(page["item"], page["cost"], page["quantity"])
-
 
