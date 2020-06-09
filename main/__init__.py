@@ -17,6 +17,7 @@ except OSError:
     pass
 
 from . import simdb
+simdb.init_app(app)
 
 from . import main
 app.register_blueprint(main.bp)
